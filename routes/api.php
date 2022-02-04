@@ -1,6 +1,7 @@
 <?php
 
-use App\Services\Authenticate;
+use App\Http\Controllers\Authenticate;
+use App\Http\Controllers\BeersController;
 use App\Services\Beers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,5 +20,5 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [Authenticate::class, 'login']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/beers/get', [Beers::class,'get']);
+    Route::get('/beers/get', [BeersController::class, 'index']);
 });

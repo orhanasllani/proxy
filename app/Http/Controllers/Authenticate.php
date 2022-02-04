@@ -1,13 +1,22 @@
 <?php
 
-namespace App\Services;
+namespace App\Http\Controllers;
 
+use App\Services\Token;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class Authenticate extends Service
+
+
+class Authenticate extends Controller
 {
+    protected $tokenService;
+
+    public function __construct()
+    {
+        $this->tokenService = new Token;
+    }
 
     public function login(Request $request)
     {
@@ -25,10 +34,6 @@ class Authenticate extends Service
 
         // If user is autheticated We generate token and return it as string
         // the end user need to save-it somehow and when the next request is made by we check if the token gets a mach
-        $user = Auth::user();
-
-        $token = $user->createToken("HELLOWORLD");
-
-        return $token->plainTextToken;
+        return $this->tokenService->generate();
     }
 }

@@ -2,9 +2,8 @@
 
 namespace App\Services;
 
-use App\Http\Controllers\Controller;
 
-class Service extends Controller
+class Service
 {
     // Some service methods
 }
